@@ -1,3 +1,4 @@
+![Ansible-Playbook](https://github.com/user-attachments/assets/9ec5c571-b9fd-497b-b584-bef205fa8a83)
 # what is Ansible ?
 
 Ansible is a simple tool that helps manage and automate tasks like software installation on multiple computers at once. Think of it like a remote control for servers or systems.
@@ -20,6 +21,7 @@ Ansible is a simple tool that helps manage and automate tasks like software inst
 
    ### Idempotent:
    This means that if you run the same playbook multiple times, it will only make changes if something needs to be changed. For example, if you already installed a program, running the playbook again won’t reinstall it.
+
    
 
         
