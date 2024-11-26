@@ -21,6 +21,8 @@ Ansible is a simple tool that helps manage and automate tasks like software inst
 
    ### Idempotent:
    This means that if you run the same playbook multiple times, it will only make changes if something needs to be changed. For example, if you already installed a program, running the playbook again won’t reinstall it.
+   
+![image01-How-Ansible-Works-Rich-Media-min-557x924-1](https://github.com/user-attachments/assets/2f683b4d-b537-42c0-97c5-e56872174a38)
 
    
 
