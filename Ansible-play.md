@@ -57,9 +57,9 @@ A playbook in Ansible is a file written in YAML that automates tasks on remote c
 
 1. Ansible server
 
-2. first-rhbk
+2. First-rhbk
 
-3. second_rhbk
+3. Second_rhbk
 
 
 **Ansible server**
