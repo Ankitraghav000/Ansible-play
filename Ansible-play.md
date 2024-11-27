@@ -693,7 +693,7 @@ sudo vim playbook1.yml
         msg: "Nginx service status: {{ nginx_status.stdout }}"
 
   handlers:
-    - name: Restart Nginx  # Handler section
+    - name: Restart Nginx  
       service:
         name: nginx
         state: restarted
@@ -738,7 +738,7 @@ sudo vim playbook1.yml
         src: /home/rhuser/Downloads/aman/rhbk.jar
         dest: "{{backup_dir}}"
 
-    - name: Build file in first RHBK
+    - name: Build file in second RHBK
       command: /home/rh-user/Downloads/kc.sh
       notify:  # Notify added here
         - Restart Nginx  # Trigger the handler to restart Nginx
@@ -752,9 +752,475 @@ sudo vim playbook1.yml
         msg: "Nginx service status: {{ nginx_status.stdout }}"
 
   handlers:
-    - name: Restart Nginx  # Handler section
+    - name: Restart Nginx  
       service:
         name: nginx
         state: restarted
 ```
-                                                                                     
+ ### **first-rhbk**
+
+\*OS details:\*NAME="Ubuntu"\
+VERSION="20.04.6 LTS (Focal Fossa)"\
+ID=ubuntu\
+ID\_LIKE=debian\
+PRETTY\_NAME="Ubuntu 20.04.6 LTS"\
+VERSION\_ID="20.04"\
+HOME\_URL="https\://www\.ubuntu.com/"\
+SUPPORT\_URL="https\://help.ubuntu.com/"\
+BUG\_REPORT\_URL="https\://bugs.launchpad.net/ubuntu/"\
+PRIVACY\_POLICY\_URL="https\://www\.ubuntu.com/legal/terms-and-policies/privacy-policy"\
+VERSION\_CODENAME=focal\
+UBUNTU\_CODENAME=focal
+
+- Download rhbk-24.0.3.zip
+
+- Change the Directory
+```
+ cd  Download
+
+```
+- Unzip the file
+
+```
+ unzip rhbk-24.0.3.zip
+
+```
+
+- Searches the package cache for available OpenJDK packages on your system, showing a list of OpenJDK versions and related packages that can be installed.
+```
+sudo apt-cache search openjdk
+```
+**Output**
+```
+rh-user@amkit-Standard-PC-Q35-ICH9-2009:~$ sudo apt-cache search openjdk
+default-jdk - Standard Java or Java compatible Development Kit
+default-jdk-doc - Standard Java or Java compatible Development Kit (documentation)
+default-jdk-headless - Standard Java or Java compatible Development Kit (headless)
+default-jre - Standard Java or Java compatible Runtime
+default-jre-headless - Standard Java or Java compatible Runtime (headless)
+openjdk-11-dbg - Java runtime based on OpenJDK (debugging symbols)
+openjdk-11-doc - OpenJDK Development Kit (JDK) documentation
+openjdk-11-jdk - OpenJDK Development Kit (JDK)
+openjdk-11-jdk-headless - OpenJDK Development Kit (JDK) (headless)
+openjdk-11-jre - OpenJDK Java runtime, using Hotspot JIT
+openjdk-11-jre-headless - OpenJDK Java runtime, using Hotspot JIT (headless)
+openjdk-11-source - OpenJDK Development Kit (JDK) source files
+crypto-policies - unify the crypto policies used by different applications and libraries
+jtreg - Regression Test Harness for the OpenJDK platform
+jtreg6 - Regression Test Harness for the OpenJDK platform
+libeclipse-collections-java - Eclipse Collections - comprehensive collections library for Java
+libhsdis0-fcml - HotSpot disassembler plugin using FCML
+libjax-maven-plugin - Using the xjc goal with OpenJDK 11+
+libreoffice - office productivity suite (metapackage)
+openjdk-11-demo - Java runtime based on OpenJDK (demos and examples)
+openjdk-11-jre-dcevm - Alternative VM for OpenJDK 11 with enhanced class redefinition
+openjdk-11-jre-zero - Alternative JVM for OpenJDK, using Zero
+openjdk-17-dbg - Java runtime based on OpenJDK (debugging symbols)
+openjdk-17-demo - Java runtime based on OpenJDK (demos and examples)
+openjdk-17-doc - OpenJDK Development Kit (JDK) documentation
+openjdk-17-jdk - OpenJDK Development Kit (JDK)
+openjdk-17-jdk-headless - OpenJDK Development Kit (JDK) (headless)
+openjdk-17-jre - OpenJDK Java runtime, using Hotspot JIT
+openjdk-17-jre-headless - OpenJDK Java runtime, using Hotspot JIT (headless)
+openjdk-17-jre-zero - Alternative JVM for OpenJDK, using Zero
+openjdk-17-source - OpenJDK Development Kit (JDK) source files
+openjdk-18-dbg - Java runtime based on OpenJDK (debugging symbols)
+openjdk-18-demo - Java runtime based on OpenJDK (demos and examples)
+openjdk-18-doc - OpenJDK Development Kit (JDK) documentation
+openjdk-18-jdk - OpenJDK Development Kit (JDK)
+openjdk-18-jdk-headless - OpenJDK Development Kit (JDK) (headless)
+openjdk-18-jre - OpenJDK Java runtime, using Hotspot JIT
+openjdk-18-jre-headless - OpenJDK Java runtime, using Hotspot JIT (headless)
+openjdk-18-jre-zero - Alternative JVM for OpenJDK, using Zero
+openjdk-18-source - OpenJDK Development Kit (JDK) source files
+openjdk-8-dbg - Java runtime based on OpenJDK (debugging symbols)
+openjdk-8-demo - Java runtime based on OpenJDK (demos and examples)
+openjdk-8-doc - OpenJDK Development Kit (JDK) documentation
+openjdk-8-jre - OpenJDK Java runtime, using Hotspot JIT
+openjdk-8-jre-headless - OpenJDK Java runtime, using Hotspot JIT (headless)
+openjdk-8-source - OpenJDK Development Kit (JDK) source files
+uwsgi-app-integration-plugins - plugins for integration of uWSGI and application
+uwsgi-plugin-jvm-openjdk-11 - Java plugin for uWSGI (OpenJDK 11)
+uwsgi-plugin-jwsgi-openjdk-11 - JWSGI plugin for uWSGI (OpenJDK 11)
+uwsgi-plugin-ring-openjdk-11 - Closure/Ring plugin for uWSGI (OpenJDK 11)
+uwsgi-plugin-servlet-openjdk-11 - JWSGI plugin for uWSGI (OpenJDK 11)
+java-package - Utility for creating Java Debian packages
+jtreg7 - Regression Test Harness for the OpenJDK platform
+libasmtools-java - OpenJDK AsmTools
+openjdk-19-dbg - Java runtime based on OpenJDK (debugging symbols)
+openjdk-19-demo - Java runtime based on OpenJDK (demos and examples)
+openjdk-19-doc - OpenJDK Development Kit (JDK) documentation
+openjdk-19-jdk - OpenJDK Development Kit (JDK)
+openjdk-19-jdk-headless - OpenJDK Development Kit (JDK) (headless)
+openjdk-19-jre - OpenJDK Java runtime, using Hotspot JIT
+openjdk-19-jre-headless - OpenJDK Java runtime, using Hotspot JIT (headless)
+openjdk-19-jre-zero - Alternative JVM for OpenJDK, using Zero
+openjdk-19-source - OpenJDK Development Kit (JDK) source files
+openjdk-21-dbg - Java runtime based on OpenJDK (debugging symbols)
+openjdk-21-demo - Java runtime based on OpenJDK (demos and examples)
+openjdk-21-doc - OpenJDK Development Kit (JDK) documentation
+openjdk-21-jdk - OpenJDK Development Kit (JDK)
+openjdk-21-jdk-headless - OpenJDK Development Kit (JDK) (headless)
+openjdk-21-jre - OpenJDK Java runtime, using Hotspot JIT
+openjdk-21-jre-headless - OpenJDK Java runtime, using Hotspot JIT (headless)
+openjdk-21-jre-zero - Alternative JVM for OpenJDK, using Zero
+openjdk-21-source - OpenJDK Development Kit (JDK) source files
+openjdk-21-testsupport - Java runtime based on OpenJDK (regression test support)
+openjdk-8-jdk - OpenJDK Development Kit (JDK)
+openjdk-8-jdk-headless - OpenJDK Development Kit (JDK) (headless)
+openjdk-8-jre-zero - Alternative JVM for OpenJDK, using Zero
+```
+
+- Install java 17 version
+```
+sudo apt install openjdk-17-jdk -y
+```
+**Output**
+```
+rh-user@amkit-Standard-PC-Q35-ICH9-2009:~$ sudo apt install openjdk-17-jdk -y
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+Suggested packages:
+  openjdk-17-demo openjdk-17-source visualvm
+The following NEW packages will be installed:
+  openjdk-17-jdk
+0 upgraded, 1 newly installed, 0 to remove and 7 not upgraded.
+Need to get 2,366 kB of archives.
+After this operation, 2,457 kB of additional disk space will be used.
+Get:1 http://in.archive.ubuntu.com/ubuntu jammy-updates/universe amd64 openjdk-17-jdk amd64 17.0.13+11-2ubuntu1~22.04 [2,366 kB]
+Fetched 2,366 kB in 3s (772 kB/s)         
+Selecting previously unselected package openjdk-17-jdk:amd64.
+(Reading database ... 277936 files and directories currently installed.)
+Preparing to unpack .../openjdk-17-jdk_17.0.13+11-2ubuntu1~22.04_amd64.deb ...
+Unpacking openjdk-17-jdk:amd64 (17.0.13+11-2ubuntu1~22.04) ...
+Setting up openjdk-17-jdk:amd64 (17.0.13+11-2ubuntu1~22.04) ...
+update-alternatives: using /usr/lib/jvm/java-17-openjdk-amd64/bin/jconsole to provide /usr/bin/jconsole (jconsole) in auto mode
+```
+
+- Check the java version
+```
+java -version
+```
+```
+rh-user@amkit-Standard-PC-Q35-ICH9-2009:~$ java -version
+openjdk version "17.0.13" 2024-10-15
+OpenJDK Runtime Environment (build 17.0.13+11-Ubuntu-2ubuntu122.04)
+OpenJDK 64-Bit Server VM (build 17.0.13+11-Ubuntu-2ubuntu122.04, mixed mode, sharing)
+```
+
+- Install the Openssh-server
+```
+sudo apt install openssh-server
+```
+**Output**
+```
+s@s:~$ sudo apt install openssh-server -y
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+Suggested packages:
+  molly-guard monkeysphere ssh-askpass
+The following NEW packages will be installed:
+  openssh-server
+0 upgraded, 1 newly installed, 0 to remove and 7 not upgraded.
+Need to get 435 kB of archives.
+After this operation, 1,537 kB of additional disk space will be used.
+Get:1 http://in.archive.ubuntu.com/ubuntu jammy-updates/main amd64 openssh-server amd64 1:8.9p1-3ubuntu0.10 [435 kB]
+Fetched 435 kB in 2s (224 kB/s)         
+Preconfiguring packages ...
+Selecting previously unselected package openssh-server.
+(Reading database ... 277930 files and directories currently installed.)
+Preparing to unpack .../openssh-server_1%3a8.9p1-3ubuntu0.10_amd64.deb ...
+Unpacking openssh-server (1:8.9p1-3ubuntu0.10) ...
+Setting up openssh-server (1:8.9p1-3ubuntu0.10) ...
+rescue-ssh.target is a disabled or a static unit not running, not starting it.
+ssh.socket is a disabled or a static unit not running, not starting it.
+Processing triggers for man-db (2.10.2-1) ...
+Processing triggers for ufw (0.36.1-4ubuntu0.1) ...
+Rules updated for profile 'Nginx Full'
+Firewall reloaded
+```
+
+- Restart the ssh
+```
+sudo systemctl restart ssh
+
+```
+- Check the status of SSH
+```
+sudo systemctl status ssh 
+```
+**Output**
+```
+s@s:~$ sudo systemctl status ssh
+● ssh.service - OpenBSD Secure Shell server
+     Loaded: loaded (/lib/systemd/system/ssh.service; enabled; vendor preset: enabled)
+     Active: active (running) since Wed 2024-11-27 15:41:09 IST; 1min 29s ago
+       Docs: man:sshd(8)
+             man:sshd_config(5)
+   Main PID: 114958 (sshd)
+      Tasks: 1 (limit: 38289)
+     Memory: 1.7M
+        CPU: 21ms
+     CGroup: /system.slice/ssh.service
+             └─114958 "sshd: /usr/sbin/sshd -D [listener] 0 of 10-100 startups"
+
+Nov 27 15:41:09 s systemd[1]: Stopping OpenBSD Secure Shell server...
+Nov 27 15:41:09 s systemd[1]: ssh.service: Deactivated successfully.
+Nov 27 15:41:09 s sshd[114958]: Server listening on 0.0.0.0 port 22.
+Nov 27 15:41:09 s systemd[1]: Stopped OpenBSD Secure Shell server.
+Nov 27 15:41:09 s sshd[114958]: Server listening on :: port 22.
+Nov 27 15:41:09 s systemd[1]: Starting OpenBSD Secure Shell server...
+Nov 27 15:41:09 s systemd[1]: Started OpenBSD Secure Shell server.
+```
+- Make a foledr backup inside the aman
+```
+sudo mkdir -p Downloads/aman/backup
+```
+
+- Opens the sudoers file
+```
+sudo visudo
+```
+
+- Add configuration in the end[Change your server name]
+
+```
+rh-user ALL=(ALL) NOPASSWD: ALL
+```
+### **second\_rhbk**
+
+\*OS details:\*
+
+NAME="Ubuntu"\
+VERSION="20.04.6 LTS (Focal Fossa)"\
+ID=ubuntu\
+ID\_LIKE=debian\
+PRETTY\_NAME="Ubuntu 20.04.6 LTS"\
+VERSION\_ID="20.04"\
+HOME\_URL="https\://www\.ubuntu.com/"\
+SUPPORT\_URL="https\://help.ubuntu.com/"\
+BUG\_REPORT\_URL="https\://bugs.launchpad.net/ubuntu/"\
+PRIVACY\_POLICY\_URL="https\://www\.ubuntu.com/legal/terms-and-policies/privacy-policy"\
+VERSION\_CODENAME=focal\
+UBUNTU\_CODENAME=focal
+
+- Download rhbk-24.0.3.zip
+
+- Change the Directory
+```
+ cd  Download
+
+```
+- Unzip the file
+
+```
+ unzip rhbk-24.0.3.zip
+```
+- Searches the package cache for available OpenJDK packages on your system, showing a list of OpenJDK versions and related packages that can be installed.
+```
+sudo apt-cache search openjdk
+```
+**Output**
+```
+rh-user@s:~$ sudo apt-cache search openjdk
+default-jdk - Standard Java or Java compatible Development Kit
+default-jdk-doc - Standard Java or Java compatible Development Kit (documentation)
+default-jdk-headless - Standard Java or Java compatible Development Kit (headless)
+default-jre - Standard Java or Java compatible Runtime
+default-jre-headless - Standard Java or Java compatible Runtime (headless)
+openjdk-11-dbg - Java runtime based on OpenJDK (debugging symbols)
+openjdk-11-doc - OpenJDK Development Kit (JDK) documentation
+openjdk-11-jdk - OpenJDK Development Kit (JDK)
+openjdk-11-jdk-headless - OpenJDK Development Kit (JDK) (headless)
+openjdk-11-jre - OpenJDK Java runtime, using Hotspot JIT
+openjdk-11-jre-headless - OpenJDK Java runtime, using Hotspot JIT (headless)
+openjdk-11-source - OpenJDK Development Kit (JDK) source files
+crypto-policies - unify the crypto policies used by different applications and libraries
+jtreg - Regression Test Harness for the OpenJDK platform
+jtreg6 - Regression Test Harness for the OpenJDK platform
+libeclipse-collections-java - Eclipse Collections - comprehensive collections library for Java
+libhsdis0-fcml - HotSpot disassembler plugin using FCML
+libjax-maven-plugin - Using the xjc goal with OpenJDK 11+
+libreoffice - office productivity suite (metapackage)
+openjdk-11-demo - Java runtime based on OpenJDK (demos and examples)
+openjdk-11-jre-dcevm - Alternative VM for OpenJDK 11 with enhanced class redefinition
+openjdk-11-jre-zero - Alternative JVM for OpenJDK, using Zero
+openjdk-17-dbg - Java runtime based on OpenJDK (debugging symbols)
+openjdk-17-demo - Java runtime based on OpenJDK (demos and examples)
+openjdk-17-doc - OpenJDK Development Kit (JDK) documentation
+openjdk-17-jdk - OpenJDK Development Kit (JDK)
+openjdk-17-jdk-headless - OpenJDK Development Kit (JDK) (headless)
+openjdk-17-jre - OpenJDK Java runtime, using Hotspot JIT
+openjdk-17-jre-headless - OpenJDK Java runtime, using Hotspot JIT (headless)
+openjdk-17-jre-zero - Alternative JVM for OpenJDK, using Zero
+openjdk-17-source - OpenJDK Development Kit (JDK) source files
+openjdk-18-dbg - Java runtime based on OpenJDK (debugging symbols)
+openjdk-18-demo - Java runtime based on OpenJDK (demos and examples)
+openjdk-18-doc - OpenJDK Development Kit (JDK) documentation
+openjdk-18-jdk - OpenJDK Development Kit (JDK)
+openjdk-18-jdk-headless - OpenJDK Development Kit (JDK) (headless)
+openjdk-18-jre - OpenJDK Java runtime, using Hotspot JIT
+openjdk-18-jre-headless - OpenJDK Java runtime, using Hotspot JIT (headless)
+openjdk-18-jre-zero - Alternative JVM for OpenJDK, using Zero
+openjdk-18-source - OpenJDK Development Kit (JDK) source files
+openjdk-8-dbg - Java runtime based on OpenJDK (debugging symbols)
+openjdk-8-demo - Java runtime based on OpenJDK (demos and examples)
+openjdk-8-doc - OpenJDK Development Kit (JDK) documentation
+openjdk-8-jre - OpenJDK Java runtime, using Hotspot JIT
+openjdk-8-jre-headless - OpenJDK Java runtime, using Hotspot JIT (headless)
+openjdk-8-source - OpenJDK Development Kit (JDK) source files
+uwsgi-app-integration-plugins - plugins for integration of uWSGI and application
+uwsgi-plugin-jvm-openjdk-11 - Java plugin for uWSGI (OpenJDK 11)
+uwsgi-plugin-jwsgi-openjdk-11 - JWSGI plugin for uWSGI (OpenJDK 11)
+uwsgi-plugin-ring-openjdk-11 - Closure/Ring plugin for uWSGI (OpenJDK 11)
+uwsgi-plugin-servlet-openjdk-11 - JWSGI plugin for uWSGI (OpenJDK 11)
+java-package - Utility for creating Java Debian packages
+jtreg7 - Regression Test Harness for the OpenJDK platform
+libasmtools-java - OpenJDK AsmTools
+openjdk-19-dbg - Java runtime based on OpenJDK (debugging symbols)
+openjdk-19-demo - Java runtime based on OpenJDK (demos and examples)
+openjdk-19-doc - OpenJDK Development Kit (JDK) documentation
+openjdk-19-jdk - OpenJDK Development Kit (JDK)
+openjdk-19-jdk-headless - OpenJDK Development Kit (JDK) (headless)
+openjdk-19-jre - OpenJDK Java runtime, using Hotspot JIT
+openjdk-19-jre-headless - OpenJDK Java runtime, using Hotspot JIT (headless)
+openjdk-19-jre-zero - Alternative JVM for OpenJDK, using Zero
+openjdk-19-source - OpenJDK Development Kit (JDK) source files
+openjdk-21-dbg - Java runtime based on OpenJDK (debugging symbols)
+openjdk-21-demo - Java runtime based on OpenJDK (demos and examples)
+openjdk-21-doc - OpenJDK Development Kit (JDK) documentation
+openjdk-21-jdk - OpenJDK Development Kit (JDK)
+openjdk-21-jdk-headless - OpenJDK Development Kit (JDK) (headless)
+openjdk-21-jre - OpenJDK Java runtime, using Hotspot JIT
+openjdk-21-jre-headless - OpenJDK Java runtime, using Hotspot JIT (headless)
+openjdk-21-jre-zero - Alternative JVM for OpenJDK, using Zero
+openjdk-21-source - OpenJDK Development Kit (JDK) source files
+openjdk-21-testsupport - Java runtime based on OpenJDK (regression test support)
+openjdk-8-jdk - OpenJDK Development Kit (JDK)
+openjdk-8-jdk-headless - OpenJDK Development Kit (JDK) (headless)
+openjdk-8-jre-zero - Alternative JVM for OpenJDK, using Zero
+```
+
+- Install java 17 version
+```
+sudo apt install openjdk-17-jdk -y
+```
+**Output**
+```
+rh-user@s:~$ sudo apt install openjdk-17-jdk -y
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+Suggested packages:
+  openjdk-17-demo openjdk-17-source visualvm
+The following NEW packages will be installed:
+  openjdk-17-jdk
+0 upgraded, 1 newly installed, 0 to remove and 7 not upgraded.
+Need to get 2,366 kB of archives.
+After this operation, 2,457 kB of additional disk space will be used.
+Get:1 http://in.archive.ubuntu.com/ubuntu jammy-updates/universe amd64 openjdk-17-jdk amd64 17.0.13+11-2ubuntu1~22.04 [2,366 kB]
+Fetched 2,366 kB in 3s (772 kB/s)         
+Selecting previously unselected package openjdk-17-jdk:amd64.
+(Reading database ... 277936 files and directories currently installed.)
+Preparing to unpack .../openjdk-17-jdk_17.0.13+11-2ubuntu1~22.04_amd64.deb ...
+Unpacking openjdk-17-jdk:amd64 (17.0.13+11-2ubuntu1~22.04) ...
+Setting up openjdk-17-jdk:amd64 (17.0.13+11-2ubuntu1~22.04) ...
+update-alternatives: using /usr/lib/jvm/java-17-openjdk-amd64/bin/jconsole to provide /usr/bin/jconsole (jconsole) in auto mode
+```
+
+- Check the java version
+```
+java -version
+```
+```
+rh-user@s:~$ java -version
+openjdk version "17.0.13" 2024-10-15
+OpenJDK Runtime Environment (build 17.0.13+11-Ubuntu-2ubuntu122.04)
+OpenJDK 64-Bit Server VM (build 17.0.13+11-Ubuntu-2ubuntu122.04, mixed mode, sharing)
+```
+
+- Install the Openssh-server
+```
+sudo apt install openssh-server
+```
+**Output**
+```
+rh-user@s:~$ sudo apt install openssh-server -y
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+Suggested packages:
+  molly-guard monkeysphere ssh-askpass
+The following NEW packages will be installed:
+  openssh-server
+0 upgraded, 1 newly installed, 0 to remove and 7 not upgraded.
+Need to get 435 kB of archives.
+After this operation, 1,537 kB of additional disk space will be used.
+Get:1 http://in.archive.ubuntu.com/ubuntu jammy-updates/main amd64 openssh-server amd64 1:8.9p1-3ubuntu0.10 [435 kB]
+Fetched 435 kB in 2s (224 kB/s)         
+Preconfiguring packages ...
+Selecting previously unselected package openssh-server.
+(Reading database ... 277930 files and directories currently installed.)
+Preparing to unpack .../openssh-server_1%3a8.9p1-3ubuntu0.10_amd64.deb ...
+Unpacking openssh-server (1:8.9p1-3ubuntu0.10) ...
+Setting up openssh-server (1:8.9p1-3ubuntu0.10) ...
+rescue-ssh.target is a disabled or a static unit not running, not starting it.
+ssh.socket is a disabled or a static unit not running, not starting it.
+Processing triggers for man-db (2.10.2-1) ...
+Processing triggers for ufw (0.36.1-4ubuntu0.1) ...
+Rules updated for profile 'Nginx Full'
+Firewall reloaded
+```
+
+- Restart the ssh
+```
+sudo systemctl restart ssh
+
+```
+- Check the status of SSH
+```
+sudo systemctl status ssh 
+```
+**Output**
+```
+rh-user@s:~$ sudo systemctl status ssh
+● ssh.service - OpenBSD Secure Shell server
+     Loaded: loaded (/lib/systemd/system/ssh.service; enabled; vendor preset: enabled)
+     Active: active (running) since Wed 2024-11-27 15:41:09 IST; 1min 29s ago
+       Docs: man:sshd(8)
+             man:sshd_config(5)
+   Main PID: 114958 (sshd)
+      Tasks: 1 (limit: 38289)
+     Memory: 1.7M
+        CPU: 21ms
+     CGroup: /system.slice/ssh.service
+             └─114958 "sshd: /usr/sbin/sshd -D [listener] 0 of 10-100 startups"
+
+Nov 27 15:41:09 s systemd[1]: Stopping OpenBSD Secure Shell server...
+Nov 27 15:41:09 s systemd[1]: ssh.service: Deactivated successfully.
+Nov 27 15:41:09 s sshd[114958]: Server listening on 0.0.0.0 port 22.
+Nov 27 15:41:09 s systemd[1]: Stopped OpenBSD Secure Shell server.
+Nov 27 15:41:09 s sshd[114958]: Server listening on :: port 22.
+Nov 27 15:41:09 s systemd[1]: Starting OpenBSD Secure Shell server...
+Nov 27 15:41:09 s systemd[1]: Started OpenBSD Secure Shell server.
+```
+- Make a foledr backup inside the aman
+```
+sudo mkdir -p Downloads/aman/backup
+```
+
+- Opens the sudoers file
+```
+sudo visudo
+```
+
+- Add configuration in the end[Change your server name]
+
+```
+rh-user ALL=(ALL) NOPASSWD: ALL
+```
+
+
+                                                                                   
