@@ -138,12 +138,23 @@ sudo apt install ansible
 ```
 **Output:**
 ```
-rhuser@ankit-Standard-PC-Q35-ICH9-2009:~$ sudo apt install ansible
+rhuser@ankit-Standard-PC-Q35-ICH9-2009:~$ sudo apt install ansible -y
 Reading package lists... Done
 Building dependency tree... Done
 Reading state information... Done
-ansible is already the newest version (10.6.0-1ppa~jammy).
-0 upgraded, 0 newly installed, 0 to remove and 7 not upgraded.
+The following NEW packages will be installed:
+  ansible
+0 upgraded, 1 newly installed, 0 to remove and 7 not upgraded.
+Need to get 17.6 MB of archives.
+After this operation, 199 MB of additional disk space will be used.
+Get:1 https://ppa.launchpadcontent.net/ansible/ansible/ubuntu jammy/main amd64 ansible all 10.6.0-1ppa~jammy [17.6 MB]
+Fetched 17.6 MB in 41s (424 kB/s)                                                                                                                    
+Selecting previously unselected package ansible.
+(Reading database ... 255252 files and directories currently installed.)
+Preparing to unpack .../ansible_10.6.0-1ppa~jammy_all.deb ...
+Unpacking ansible (10.6.0-1ppa~jammy) ...
+Setting up ansible (10.6.0-1ppa~jammy) ...
+
 ```
 
 - Check the version of Ansible
