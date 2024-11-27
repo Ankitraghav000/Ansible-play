@@ -1345,4 +1345,5 @@ rh-user@192.168.1.242      : ok=8    changed=5    unreachable=0    failed=0    s
 rh-user@192.168.122.37     : ok=8    changed=5    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
 
 ```
-                                                                                  
+## Conclusion                                                                                  
+This Ansible playbook automates the process of managing and deploying JAR files across multiple servers. It begins by extracting a ZIP file on the local machine and converting it into a JAR file. The JAR file is then backed up and copied to the designated directories on both the first and second RHBK servers. Following this, a build script (kc.sh) is executed on each server, and Nginx is restarted using handlers to apply changes. Additionally, the playbook verifies the status of the Nginx service, ensuring that all tasks are successfully completed.
