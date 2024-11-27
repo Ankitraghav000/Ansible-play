@@ -554,14 +554,23 @@ pip install --upgrade paramiko
 ```
 **Output**
 ```
-rhuser@ankit-Standard-PC-Q35-ICH9-2009:~$ pip install --upgrade param
+rhuser@ankit-Standard-PC-Q35-ICH9-2009:~$ pip install --upgrade paramiko
 Defaulting to user installation because normal site-packages is not writeable
-Collecting param
-  Downloading param-2.1.1-py3-none-any.whl (116 kB)
-     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 116.8/116.8 KB 1.1 MB/s eta 0:00:00
-Installing collected packages: param
-Successfully installed param-2.1.1
-
+Requirement already satisfied: paramiko in /usr/lib/python3/dist-packages (2.9.3)
+Collecting paramiko
+  Downloading paramiko-3.5.0-py3-none-any.whl (227 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 227.1/227.1 KB 3.1 MB/s eta 0:00:00
+Requirement already satisfied: cryptography>=3.3 in /usr/lib/python3/dist-packages (from paramiko) (3.4.8)
+Requirement already satisfied: pynacl>=1.5 in /usr/lib/python3/dist-packages (from paramiko) (1.5.0)
+Requirement already satisfied: bcrypt>=3.2 in /usr/lib/python3/dist-packages (from paramiko) (3.2.0)
+Collecting cffi>=1.4.1
+  Downloading cffi-1.17.1-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (446 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 446.2/446.2 KB 4.5 MB/s eta 0:00:00
+Collecting pycparser
+  Downloading pycparser-2.22-py3-none-any.whl (117 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 117.6/117.6 KB 2.2 MB/s eta 0:00:00
+Installing collected packages: pycparser, cffi, paramiko
+Successfully installed cffi-1.17.1 paramiko-3.5.0 pycparser-2.22
 ```
 - Upgrades the cryptography library, which is required for secure communication, encryption, and decryption tasks in Ansible, especially for handling SSH keys and SSL/TLS connections.
 ```
@@ -926,7 +935,7 @@ sudo apt install openssh-server
 ```
 **Output**
 ```
-s@s:~$ sudo apt install openssh-server -y
+rh-user@amkit-Standard-PC-Q35-ICH9-2009:~$  sudo apt install openssh-server -y
 Reading package lists... Done
 Building dependency tree... Done
 Reading state information... Done
@@ -964,7 +973,7 @@ sudo systemctl status ssh 
 ```
 **Output**
 ```
-s@s:~$ sudo systemctl status ssh
+rh-user@amkit-Standard-PC-Q35-ICH9-2009:~$ sudo systemctl status ssh
 ● ssh.service - OpenBSD Secure Shell server
      Loaded: loaded (/lib/systemd/system/ssh.service; enabled; vendor preset: enabled)
      Active: active (running) since Wed 2024-11-27 15:41:09 IST; 1min 29s ago
@@ -1232,6 +1241,108 @@ sudo visudo
 ```
 rh-user ALL=(ALL) NOPASSWD: ALL
 ```
+## **Ansible Server**
+- Change the directory
 
+```
+cd playbook
+```
 
-                                                                                   
+- Run the Playbook
+
+```
+ansible-playbook -i host.ini playbook1.yml 
+```
+**Output**
+```
+rhuser@ankit-Standard-PC-Q35-ICH9-2009:~/playbook$ ansible-playbook -i host.ini playbook1.yml 
+[WARNING]: While constructing a mapping from /home/rhuser/playbook/playbook1.yml, line 26, column 3,
+found a duplicate dict key (tasks). Using last defined value only.
+[WARNING]: While constructing a mapping from /home/rhuser/playbook/playbook1.yml, line 85, column 3,
+found a duplicate dict key (tasks). Using last defined value only.
+
+PLAY [Zip file & copy it (Localhost)] ******************************************************************
+
+TASK [Gathering Facts] *********************************************************************************
+ok: [localhost]
+
+TASK [Ensure Downloads directory exists] ***************************************************************
+ok: [localhost]
+
+TASK [Extract the zip file] ****************************************************************************
+ok: [localhost]
+
+TASK [Change extracted files into a jar file] **********************************************************
+changed: [localhost]
+
+PLAY [Manage JAR file on First server] *****************************************************************
+
+TASK [Gathering Facts] *********************************************************************************
+[WARNING]: Platform linux on host rh-user@192.168.122.37 is using the discovered Python interpreter at
+/usr/bin/python3.10, but future installation of another Python interpreter could change the meaning of
+that path. See https://docs.ansible.com/ansible-
+core/2.17/reference_appendices/interpreter_discovery.html for more information.
+ok: [rh-user@192.168.122.37]
+
+TASK [Check if the existing jar file exists on first server] *******************************************
+ok: [rh-user@192.168.122.37]
+
+TASK [Backup the existing jar file on first server] ****************************************************
+ changed: [rh-user@192.168.122.37]
+
+TASK [Copy jar file from Ansible server to first server] ***********************************************
+changed: [rh-user@192.168.122.37]
+
+TASK [Build file in first RHBK] ************************************************************************
+changed: [rh-user@192.168.122.37]
+
+TASK [Check nginx service status using curl] ***********************************************************
+changed: [rh-user@192.168.122.37]
+
+TASK [Display nginx service status] ********************************************************************
+ok: [rh-user@192.168.122.37] => {
+    "msg": "Nginx service status: <!DOCTYPE html>\n<html>\n<head>\n<title>Welcome to nginx!</title>\n<style>\n    body {\n        width: 35em;\n        margin: 0 auto;\n        font-family: Tahoma, Verdana, Arial, sans-serif;\n    }\n</style>\n</head>\n<body>\n<h1>Welcome to nginx!</h1>\n<p>If you see this page, the nginx web server is successfully installed and\nworking. Further configuration is required.</p>\n\n<p>For online documentation and support please refer to\n<a href=\"http://nginx.org/\">nginx.org</a>.<br/>\nCommercial support is available at\n<a href=\"http://nginx.com/\">nginx.com</a>.</p>\n\n<p><em>Thank you for using nginx.</em></p>\n</body>\n</html>"
+}
+
+RUNNING HANDLER [Restart Nginx] ************************************************************************
+changed: [rh-user@192.168.122.37]
+
+PLAY [Manage JAR file on Second server] ****************************************************************
+
+TASK [Gathering Facts] *********************************************************************************
+[WARNING]: Platform linux on host rh-user@192.168.1.242 is using the discovered Python interpreter at
+/usr/bin/python3.10, but future installation of another Python interpreter could change the meaning of
+that path. See https://docs.ansible.com/ansible-
+core/2.17/reference_appendices/interpreter_discovery.html for more information.
+ok: [rh-user@192.168.1.242]
+
+TASK [Check if the existing jar file exists on second server] ******************************************
+ok: [rh-user@192.168.1.242]
+
+TASK [Backup the existing jar file on second server] ***************************************************
+changed: [rh-user@192.168.1.242]
+
+TASK [Copy jar file from Ansible server to second server] **********************************************
+changed: [rh-user@192.168.1.242]
+
+TASK [Build file in first RHBK] ************************************************************************
+changed: [rh-user@192.168.1.242]
+
+TASK [Check nginx service status using curl] ***********************************************************
+changed: [rh-user@192.168.1.242]
+
+TASK [Display nginx service status] ********************************************************************
+ok: [rh-user@192.168.1.242] => {
+    "msg": "Nginx service status: <!DOCTYPE html>\n<html>\n<head>\n<title>Welcome to nginx!</title>\n<style>\n    body {\n        width: 35em;\n        margin: 0 auto;\n        font-family: Tahoma, Verdana, Arial, sans-serif;\n    }\n</style>\n</head>\n<body>\n<h1>Welcome to nginx!</h1>\n<p>If you see this page, the nginx web server is successfully installed and\nworking. Further configuration is required.</p>\n\n<p>For online documentation and support please refer to\n<a href=\"http://nginx.org/\">nginx.org</a>.<br/>\nCommercial support is available at\n<a href=\"http://nginx.com/\">nginx.com</a>.</p>\n\n<p><em>Thank you for using nginx.</em></p>\n</body>\n</html>"
+}
+
+RUNNING HANDLER [Restart Nginx] ************************************************************************
+changed: [rh-user@192.168.1.242]
+
+PLAY RECAP *********************************************************************************************
+localhost                  : ok=4    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+rh-user@192.168.1.242      : ok=8    changed=5    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+rh-user@192.168.122.37     : ok=8    changed=5    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
+```
+                                                                                  
