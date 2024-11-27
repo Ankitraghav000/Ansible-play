@@ -21,19 +21,35 @@ Ansible is a simple tool that helps manage and automate tasks like software inst
 
    ### Idempotent:
    This means that if you run the same playbook multiple times, it will only make changes if something needs to be changed. For example, if you already installed a program, running the playbook again won’t reinstall it.
-   
-![image01-How-Ansible-Works-Rich-Media-min-557x924-1](https://github.com/user-attachments/assets/2f683b4d-b537-42c0-97c5-e56872174a38)
-
+   ![ansible-cover](https://github.com/user-attachments/assets/c2f02193-dd85-463a-9367-3e75592e8eb3)
 ## playbook 
 
 A playbook in Ansible is a file written in YAML that automates tasks on remote computers (servers). It defines a set of instructions (called tasks) that Ansible will run on the specified systems (called hosts). Each task performs an action, such as installing software or configuring settings.
 ### How It Works:
 
-    Hosts: The playbook specifies which servers to target.
-    Tasks: It lists the steps (like installing software) to execute on those servers.
-    Execution: When you run the playbook, Ansible connects to the remote servers and carries out each task one by one.
-    Reporting: After each task, Ansible tells you if it was successful, failed, or skipped.
-
+**Hosts:**
+   The playbook specifies which servers to target.
    
+   **Tasks:**
+   It lists the steps (like installing software) to execute on those servers.
+   
+**Execution:**
+   When you run the playbook, Ansible connects to the remote servers and carries out each task one by one.
+   
+**Reporting:** 
+   After each task, Ansible tells you if it was successful, failed, or skipped.
 
+## **Objective**
+
+- Use the specified inventory file.
+- Login as the user rh-user.
+- Set up a directory at /home/rh-user/stc-code.
+- Define all necessary variables for paths.
+- Backing up the existing JAR file on the RHBK servers to /backup/\<timestamp>.
+- Copying the new JAR file to the /Downloads/rhbk/providers directory on both RHBK servers.
+- Running the kc.sh build script on the RHBK servers.
+- Implement a curl command to display the service status
+- Restarting the RHBK servers.
+- Implement a curl command to display the service status 
+- Change the RHBK service to a notifier (using Ansible handlers).
         
