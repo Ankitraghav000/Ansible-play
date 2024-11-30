@@ -646,7 +646,7 @@ sudo vim playbook1.yml
   tasks:
     - name: Ensure Downloads directory exists
       file:
-        path: /home/ankit/Downloads
+        path: /home/rhuser/Downloads
         state: directory
         mode: '0755'
 
