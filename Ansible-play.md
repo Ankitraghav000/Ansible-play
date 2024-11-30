@@ -670,7 +670,7 @@ sudo vim playbook1.yml
     stc_code_dir: "/home/rh-user/stc-code"
 
   tasks:
-    - name: Ensure rh-user is logged in
+    - name: Ensure rh-user is present
       user:
         name: rh-user
         state: present
