@@ -617,7 +617,10 @@ Create a folder aman inside the Downloads
 ```
 sudo mkdir -p Downloads/aman
 ```
-- Create a custom inventory file: 
+- Create a custom inventory file:
+```
+sudo vim host.ini
+```
 ```
 [webservers]
 
