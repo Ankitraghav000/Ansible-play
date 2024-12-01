@@ -657,7 +657,6 @@ sudo vim playbook1.yml
       unarchive:
         src: "{{extract_src}}"
         dest: "{{extract_dest}}"
-        remote_src: yes
 
     - name: Change extracted files into a jar file
       command: jar cvf "{{extract_jar}}" -C /home/rhuser/Downloads/aman/ .
