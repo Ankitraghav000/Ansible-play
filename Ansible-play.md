@@ -663,7 +663,7 @@ sudo vim playbook1.yml
 
 - name: Manage JAR file on First server
   hosts: webservers
-  become_user: rh-user
+  become: yes
   vars:
     backup_dir: "/home/rh-user/Downloads/backup"
     backup_existing_dir: "/home/rh-user/Downloads/backup/rhbk.jar.{{ ansible_date_time.iso8601 }}"
@@ -722,7 +722,7 @@ sudo vim playbook1.yml
 
 - name: Manage JAR file on Second server
   hosts: webservers1
-  become_user: rh-user
+  become: yes
   vars:
     backup_dir: "/home/rh-user/Downloads/backup"
     backup_existing_dir: "/home/rh-user/Downloads/backup/rhbk.jar.{{ ansible_date_time.iso8601 }}"
